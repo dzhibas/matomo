@@ -30,7 +30,10 @@ function initTopControls() {
     if ($topControlsContainer.length) {
         $topControlsContainer.find('.piwikTopControl').each(function () {
             var $control = $(this);
-            if ($control.css('display') == 'none') {
+            var $onlyChild = $control.children().length === 1 ? $control.children(":first") : null;
+
+            // if the element or its direct descendant is hidden, skip
+            if (($control.css('display') === 'none') || ($onlyChild && $onlyChild.css('display') === 'none')) {
                 return;
             }
 
